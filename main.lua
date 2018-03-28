@@ -12,7 +12,8 @@ debugGraph = require 'modules.debugGraph.debugGraph'
 
 math.randomseed(os.time())
 
-debugger = false
+debugger = true
+--print ("hello")
 
 dofile("math.lua")
 dofile("terminal.lua")
@@ -32,7 +33,7 @@ dofile("entity.lua")
 dofile("particles.lua")
 
 --the scale of the map
-scale = 150
+scale = 80
 
 screenwidth = love.graphics.getWidth( )
 
@@ -136,9 +137,9 @@ function love.update(dt)
 		player.move_camera(dt)
 		maplib.liquid_flow(dt)
 		--debug
-		if love.keyboard.isDown("space") then
-			print("clear")
-		end
+		--if love.keyboard.isDown("space") then
+		--	print("clear")
+		--end
 		
 		
 		entity.gravity()

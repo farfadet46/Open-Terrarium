@@ -11,7 +11,12 @@ crafting_y = 350
 craft_inv_x = 120
 craft_inv_y = 50
 
-craft_output_x = 380
+-- Position de l'image de fleche :
+fleche = love.graphics.newImage("textures/fleche.png")
+craft_img_x = 380
+craft_img_y = 134
+
+craft_output_x = 480
 craft_output_y = 134
 
 crafting_selection_x = 1
@@ -38,10 +43,14 @@ end
 
 --draw entire inventory
 function crafting.render_crafting()
+
 	if crafting_open == true then
 		--draw output table
 		love.graphics.draw(inventory_slot,  craft_output_x, craft_output_y,0, 1, 1)
 		
+		--draw fleche
+		love.graphics.draw(fleche, craft_img_x, craft_img_y, 0, 1, 1)
+	
 		--draw output selection
 		if craft_output_selection_x > 0 and craft_output_selection_y > 0 then
 			love.graphics.draw(inventory_slot_selection, craft_output_x, craft_output_y,0, 1, 1)
@@ -118,10 +127,7 @@ function crafting.render_crafting()
 		if crafting_selection_x > 0 and crafting_selection_y > 0 then
 			love.graphics.draw(inventory_slot_selection,  ((crafting_selection_x-1)*84)+crafting_x, ((crafting_selection_y-1)*84)+crafting_y,0, 1, 1)
 		end
-		--love.graphics.rectangle("line", ((crafting_selection_x-1)*84)+crafting_x, ((crafting_selection_y-1)*84)+crafting_y, 84, 84 )
-		
-		--love.graphics.draw(inventory_slot_selection,  crafting_x+(inventory_selection*(inv_slot_width/2)), crafting_y,0, 1/2, 1/2)
-		
+
 		--draw items
 		local xstep = 0
 		local ystep = 0
@@ -237,7 +243,7 @@ function crafting.left_click(selectionerx,selectionery,inventory,inventory_width
 		--put into existing
 		elseif inventory[i]["id"] == crafting.held_item["id"] then
 			--add into
-			if inventory[i]["count"] + crafting.held_item["count"] <= 64 then
+			if inventory[i]["count"] + crafting.held_item["count"] <= inventory_max then
 				inventory[i]["count"] = inventory[i]["count"] + crafting.held_item["count"]
 				crafting.held_item = {}
 			end
@@ -272,7 +278,7 @@ function crafting.right_click(selectionerx,selectionery,inventory,inventory_widt
 			
 			crafting.held_item = {}
 		--add to existing stack
-		elseif inventory[i]["id"] == crafting.held_item["id"] and  inventory[i]["count"] + crafting.held_item["count"] <= 64 then
+		elseif inventory[i]["id"] == crafting.held_item["id"] and  inventory[i]["count"] + crafting.held_item["count"] <= inventory_max then
 			
 			inventory[i]["count"] = inventory[i]["count"] + 1
 			
@@ -287,12 +293,43 @@ function crafting.right_click(selectionerx,selectionery,inventory,inventory_widt
 end
 
 
+	
+list_recipe ={
+	{	name="wood",
+		recipe={
+		nil,nil,nil,
+		nil,"tree",nil,
+		nil,nil,nil
+		},
+		output="wood",
+		amount="4"
+	}	
+}
+
+
+--[[
+faudrait plutot créer une table de block avec le nom et pas l'id block["wood"] = {name = "wood", image = "wood.png"},
+ puis créer des fonctions pour enregistrer un nouveau item + craft, 
+ et faire une liste de recette avec rec7 = { {name="wood", recipe={nil, "tree", nil,nil},output="wood", amount=4}} 
+ puis dans le test du craft il faut test chaque entrée dans la table de rec7, 
+ puis une autre boucle pour tester si chaque item dans la grille correspond a chaque item de la liste, car là il test si 1 seul item correspond
+
+]]--
+
+
+function create_node(node_name, node_description, node_image, node_drop, node_groups)
+	list_nodes.insert( {name = node_name, description = node_description, image = node_image, drop = node_drop, groups = node_groups} )
+end
+
+function create_craft(node_name,craft_recipe,craft_output,craft_amount)
+--	craftinsert = list_recipe.insert ( name=node_name, recipe=craft_recipe, output=craft_output, amount=craft_amount )
+end
+
+--create_node("fab", "mon premier test", "aucune.png", "fab", 0)
+
+
 recipe_test = {
-recipe = {
-nil,nil,nil,
-nil,7,nil,
-nil,nil,nil,
-},
+recipe = { nil,nil,nil,nil,7,nil,nil,nil,nil },
 output = 8,
 amount = 4,
 }
@@ -300,9 +337,11 @@ amount = 4,
 
 --crafting mechanic
 function detect_recipes()
-	print("add shift clicking")
+	--print("add shift clicking")
 	--print("----------------------")
+		
 	for i = 1,crafting.craft_size*crafting.craft_size do
+	
 		if recipe_test["recipe"][i] == crafting.craft_inventory[i]["id"] then
 			if i == crafting.craft_size*crafting.craft_size then
 				--print(" real recipe")
@@ -310,6 +349,7 @@ function detect_recipes()
 				crafting.output_inventory[1]["count"] = recipe_test["amount"]
 			end
 		end
+		
 		if recipe_test["recipe"][i] ~= crafting.craft_inventory[i]["id"] then
 			--print("move onto next")
 			crafting.output_inventory[1] = {}
@@ -317,5 +357,4 @@ function detect_recipes()
 		end
 		--print(crafting.craft_inventory[i]["id"])
 	end
-	
 end

@@ -7,6 +7,7 @@ pause_menu_items = {
 "GRAPHICS",
 "VOLUME",
 "WORLD",
+"HELP",
 "EXIT"
 }
 
@@ -26,17 +27,27 @@ function pause_game()
 	end
 	
 	--exit
-	if pause_menu_submenu == "EXIT" and love.mouse.isDown(1) then
-		maplib.save_chunks()
-		love.filesystem.write( "/map/player.txt", TSerial.pack({inventory,chunkx,chunky,player.playerx,player.playery}))
-		
-		print("saving...")
-		
-		love.timer.sleep(1)
-		
-		love.event.push('quit')
+	if love.mouse.isDown(1) then
+		if pause_menu_submenu == "GRAPHICS" then
+		end
+		if pause_menu_submenu == "VOLUME" then
+		end
+		if pause_menu_submenu == "WORLD" then
+		end
+		if pause_menu_submenu == "HELP" then
+			print ("bah")
+		end
+		if pause_menu_submenu == "EXIT" then
+			maplib.save_chunks()
+			love.filesystem.write( "/map/player.txt", TSerial.pack({inventory,chunkx,chunky,player.playerx,player.playery}))
+			
+			print("saving...")
+			
+			love.timer.sleep(1)
+			
+			love.event.push('quit')
+		end
 	end
-	
 end
 
 

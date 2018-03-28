@@ -45,9 +45,7 @@ selected_chunkx,selected_chunky = 0,0
 function menu.draw()
 	
 	menu.cursor()
-	
-	
-	
+
 	love.graphics.setFont(font)
 	love.graphics.setColor(0,0,120,255)
 	for i = 1,characters do
@@ -76,7 +74,6 @@ function menu.draw()
 		love.graphics.setColor(255,255,255,255)
 		love.graphics.print("Score:"..tostring(score),xxer,12)
 
-		
 		--debug mining
 		if player.mining == true then
 			love.graphics.setColor(255,0,0,255)
