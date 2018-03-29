@@ -37,7 +37,7 @@ function move(dt)
 		--oldposx,oldposy = player.playerx,player.playery
 	--end
 	
-	if love.keyboard.isDown("w") then
+	if love.keyboard.isDown("space") then
 		--jump()
 		physics.player_mod_y(-0.15)
 	end
@@ -47,7 +47,7 @@ function move(dt)
 	
 	
 	
-	if love.keyboard.isDown("a") then
+	if love.keyboard.isDown("q") then
 	  --player.playerx = player.playerx - 0.1
 	  physics.player_mod_x(-0.01)
 	end
@@ -136,7 +136,7 @@ function love.keypressed( key, scancode, isrepeat )
 	--end
 	
 	--throw stuff
-	if key == "q" then
+	if key == "j" then
 		throw_item()
 	end
 	
@@ -321,9 +321,7 @@ end
 --load up the player's character textures
 function load_player_textures()
 
-	
-	player_head_right = love.graphics.newImage("textures/player_head_right.png")
-	player_head_left = love.graphics.newImage("textures/player_head_left.png")
+	player_head = love.graphics.newImage("textures/player_head.png")
 	player_arm = love.graphics.newImage("textures/player_arm.png")
 	player_body = love.graphics.newImage("textures/player_body.png")
 	player_leg = love.graphics.newImage("textures/player_leg.png")
@@ -495,11 +493,14 @@ function player.draw()
 	local yaw = math.atan(vec.y/vec.x)
 	
 	
-	--head
-	if player_drawnx > xor then
-		love.graphics.draw(player_head_left,  player_drawnx, player_drawny-((scale/17.7)*12),yaw, scale/17.7, scale/17.7,4,4)
+	--head (only one image for right and left ;)
+	if player_drawnx > xor then 
+		--left
+		love.graphics.draw(player_head,  player_drawnx, player_drawny-((scale/17.7)*12),yaw, (scale/17.7)*-1, scale/17.7,4,4)
 	else
-		love.graphics.draw(player_head_right,  player_drawnx, player_drawny-((scale/17.7)*12),yaw, scale/17.7, scale/17.7,4,4)
+		--right
+		love.graphics.draw(player_head,  player_drawnx, player_drawny-((scale/17.7)*12),yaw, (scale/17.7), scale/17.7,4,4)
+		
 	end
 	
 	
@@ -521,7 +522,6 @@ function player.draw()
 	--THIS IS DEBUG INFO FOR THE COLLISION DETECTION
 	
     --love.graphics.rectangle( "line", player_drawnx-(scale/5), player_drawny-(scale/1.1), 0.4*scale,1.71*scale )
-    
 	--love.graphics.circle( "fill", player_drawnx, player_drawny, 3 ) --center
 end
 

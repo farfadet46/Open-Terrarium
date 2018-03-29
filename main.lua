@@ -136,11 +136,6 @@ function love.update(dt)
 		mine(key,dt)
 		player.move_camera(dt)
 		maplib.liquid_flow(dt)
-		--debug
-		--if love.keyboard.isDown("space") then
-		--	print("clear")
-		--end
-		
 		
 		entity.gravity()
 		entity.physics_apply(dt)
