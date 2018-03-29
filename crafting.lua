@@ -3,6 +3,8 @@
 crafting = {}
 crafting_open = false
 
+inventory_max = 99
+
 crafting.craft_size = 3 --number x number
 
 crafting_x = 120
@@ -156,6 +158,7 @@ end
 old_left_mouse = false
 old_selected_slot = 0
 selected_slot = 0
+
 function crafting.move_items()
 	local left = love.mouse.isDown(1)
 	local right = love.mouse.isDown(2) --split stack in half
