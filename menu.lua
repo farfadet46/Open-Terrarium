@@ -3,7 +3,7 @@ menu = {}
 
 mx,my = 1,1
 
-menutitle = {"O","p","e","n"," ","T","e","r","r","a","r","i","u","m"," ","0",".","0",".","1"}
+menutitle = {"O","p","e","n"," ","T","e","r","r","a","r","i","u","m"," ","0",".","1",".","0"}
 menu_char = {}
 for i, v in ipairs(menutitle) do
 	--print(i)

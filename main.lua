@@ -95,11 +95,15 @@ function love.load()
 	stepsound = love.audio.newSource("sounds/step.ogg", "static")
 	oof = love.audio.newSource("sounds/oof.ogg", "static")
 	item_magnet_pickup = love.audio.newSource("sounds/item_magnet.ogg", "static")
-	menu_music = love.audio.newSource("sounds/menu_music.ogg")
+	
+	--invalid file ?
+	
+	menu_music = love.audio.newSource("sounds/menu_music.ogg","static")
 	menu_music:setLooping(true)
-	--wonder_music = love.audio.newSource("sounds/wonder.ogg")
-	--wonder_music:setLooping(true)
-	--wonder_music:play()
+	
+	wonder_music = love.audio.newSource("sounds/wonder.ogg","static")
+	wonder_music:setLooping(true)
+	wonder_music:play()
 	
 	texture_table = {}
 	local i = 1

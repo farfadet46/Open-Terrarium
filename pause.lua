@@ -72,12 +72,13 @@ function render_pause_menu()
 			love.graphics.rectangle( "fill", love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2)-5, starter_y-9+(ier*100)-5,fontbig:getWidth(item)+10, fontbig:getHeight(item)+10 )
 		end
 		--
-		love.graphics.setColor(255,255,255,255)
+		love.graphics.setColor(0,0,0,255)
 		love.graphics.rectangle( "fill", love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2)-2, starter_y-9+(ier*100),fontbig:getWidth(item), fontbig:getHeight(item) )
 		---
-		love.graphics.setColor(0,0,0,255)
+		love.graphics.setColor(100,255,255,255)
 		love.graphics.setFont(fontbig)
-		love.graphics.print(item, love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2),starter_y+(ier*100))
+		-- debug for center text in height (y -7)
+		love.graphics.print(item, love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2),starter_y+(ier*100)-7)
 		
 		
 		

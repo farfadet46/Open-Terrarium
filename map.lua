@@ -142,6 +142,7 @@ function maplib.load_chunks()
 			end
 			
 			loaded_chunks[xxer][yyer] = data
+			--ERROR HERE wen i spam the F5 key ;D (index nil value)
 		--end
 	end
 end
@@ -223,7 +224,8 @@ render, and modify everything to work correctly with all loaded chunks
 if loaded_chunks == nil then
 	loaded_chunks = {} --chunks in mememory
 end
-if not love.filesystem.exists("map") then
+
+if not love.filesystem.getInfo("map") then
 	love.filesystem.createDirectory( "map" )
 end
 
@@ -235,8 +237,7 @@ function maplib.createmap()
 		--end
 		for yy  = chunky-max_chunks,chunky+max_chunks do 
 				
-			local block_exists = love.filesystem.exists("/map/"..xx.."_"..yy..".txt")
-			
+			local block_exists = love.filesystem.getInfo("/map/"..xx.."_"..yy..".txt")
 			
 			local number = 0
 			local val = 0
