@@ -396,9 +396,6 @@ function player.draw()
 		
 		old_leg_animation = leg_animation
 		
-		
-		--TODO --add a system to put it right or left
-		
 		--arm animation
 		if player.inertiax ~= 0 then
 			if arm_animation_up == true then
@@ -477,9 +474,7 @@ function player.draw()
 	
 	--right leg
 	love.graphics.draw(player_leg,  player_drawnx, player_drawny+((scale/17.7)*2),-leg_animation, scale/17.7, scale/17.7,2,0)
-	
-	
-	
+		
 	--left arm
 	love.graphics.draw(player_arm,  player_drawnx, player_drawny-((scale/17.7)*8),arm_animation, scale/17.7, scale/17.7,2,0)
 	
@@ -509,8 +504,6 @@ function player.draw()
 	end
 	
 	
-	
-	
 	--wielded item
 	-- block loaded_chunks[selected_chunkx][selected_chunky][mx][my]["block"]
 	-- render texture_table[inventory[i]["id"]]
@@ -535,7 +528,7 @@ function player.draw()
 	--THIS IS DEBUG INFO FOR THE COLLISION DETECTION
 	
     --love.graphics.rectangle( "line", player_drawnx-(scale/5), player_drawny-(scale/1.1), 0.4*scale,1.71*scale )
-	love.graphics.circle( "fill", player_drawnx, player_drawny, 3 ) --center
+	--love.graphics.circle( "fill", player_drawnx, player_drawny, 3 ) --center
 end
 
 
