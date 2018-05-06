@@ -31,6 +31,7 @@ function pause_game()
 		if pause_menu_submenu == "GRAPHICS" then
 		end
 		if pause_menu_submenu == "VOLUME" then
+			--render_volume_menu()
 		end
 		if pause_menu_submenu == "WORLD" then
 		end
@@ -50,7 +51,17 @@ function pause_game()
 	end
 end
 
+function render_volume_menu()
+	--menu title
+	love.graphics.setColor(255,255,255,255)
+	love.graphics.setFont(hugefont)
+	love.graphics.print("GAME MENU", love.graphics.getWidth( )/2-(hugefont:getWidth("GAME MENU")/2),50)
 
+	--volume
+	love.graphics.setColor(0,0,0,255)
+	love.graphics.rectangle( "fill", love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2)-2, starter_y-9+(ier*100),fontbig:getWidth(item), fontbig:getHeight(item) )
+	---
+end
 
 function render_pause_menu()
 	
@@ -75,7 +86,7 @@ function render_pause_menu()
 		love.graphics.setColor(0,0,0,255)
 		love.graphics.rectangle( "fill", love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2)-2, starter_y-9+(ier*100),fontbig:getWidth(item), fontbig:getHeight(item) )
 		---
-		love.graphics.setColor(100,255,255,255)
+		love.graphics.setColor(0,255,255,255)
 		love.graphics.setFont(fontbig)
 		-- debug for center text in height (y -7)
 		love.graphics.print(item, love.graphics.getWidth( )/2-(fontbig:getWidth(item)/2),starter_y+(ier*100)-7)

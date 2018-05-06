@@ -57,7 +57,7 @@ function move(dt)
 	
 	if love.keyboard.isDown("=") and scale < 150 then
 		scale = scale + 1
-	elseif love.keyboard.isDown("-") and scale > 15 then --15
+	elseif love.keyboard.isDown("$") and scale > 15 then --15
 		scale = scale - 1
 	end
 	
@@ -96,9 +96,9 @@ function love.keypressed( key, scancode, isrepeat )
 		--love.event.push('quit')
 		pause = not pause
 		if pause == false then
-			--wonder_music:play()
+			wonder_music:play()
 		else
-			--wonder_music:stop()
+			wonder_music:stop()
 		end
 	end
 	--screenshot
@@ -396,6 +396,9 @@ function player.draw()
 		
 		old_leg_animation = leg_animation
 		
+		
+		--TODO --add a system to put it right or left
+		
 		--arm animation
 		if player.inertiax ~= 0 then
 			if arm_animation_up == true then
@@ -461,7 +464,13 @@ function player.draw()
 			end
 		end
 	end
-		
+	
+	--2d vector
+	local xor, yor = love.mouse.getPosition( )
+	local vec = {x=player_drawnx-xor, y= player_drawny-((scale/17.7)*12)-yor}
+	
+	local yaw = math.atan(vec.y/vec.x)
+	
 	
 	--left leg
 	love.graphics.draw(player_leg,  player_drawnx, player_drawny+((scale/17.7)*2),leg_animation, scale/17.7, scale/17.7,2,0)
@@ -482,17 +491,13 @@ function player.draw()
 		--right arm
 		love.graphics.draw(player_arm,  player_drawnx, player_drawny-((scale/17.7)*8),-arm_animation, scale/17.7, scale/17.7,2,0)
 	else
-		love.graphics.draw(player_arm,  player_drawnx, player_drawny-((scale/17.7)*8),mining_animation, scale/17.7, scale/17.7,2,0)
+		if player_drawnx > xor then 
+			love.graphics.draw(player_arm,  player_drawnx, player_drawny-((scale/17.7)*8),mining_animation*-1, scale/17.7, scale/17.7,2,0)
+		else
+			love.graphics.draw(player_arm,  player_drawnx, player_drawny-((scale/17.7)*8),mining_animation, scale/17.7, scale/17.7,2,0)
+		end
 	end
-	
-	
-	--2d vector
-	local xor, yor = love.mouse.getPosition( )
-	local vec = {x=player_drawnx-xor, y= player_drawny-((scale/17.7)*12)-yor}
-	
-	local yaw = math.atan(vec.y/vec.x)
-	
-	
+		
 	--head (only one image for right and left ;)
 	if player_drawnx > xor then 
 		--left
@@ -512,9 +517,17 @@ function player.draw()
 	if inventory[inventory_selection]["id"] then
 		--mining animation
 		if mine_process == 0 and mining_animation == 0 then
-			love.graphics.draw(texture_table[inventory[inventory_selection]["id"]],  player_drawnx, player_drawny-((scale/17.7)*8),-arm_animation, scale/45, scale/45,-5,-15)
+			if player_drawnx > xor then
+				love.graphics.draw(texture_table[inventory[inventory_selection]["id"]],  player_drawnx, player_drawny-((scale/17.7)*8),-arm_animation, scale/45, scale/45,20,-15)
+			else
+				love.graphics.draw(texture_table[inventory[inventory_selection]["id"]],  player_drawnx, player_drawny-((scale/17.7)*8),-arm_animation, scale/45, scale/45,-5,-15)
+			end
 		else
-			love.graphics.draw(texture_table[inventory[inventory_selection]["id"]],  player_drawnx, player_drawny-((scale/17.7)*8),mining_animation, scale/45, scale/45,-5,-15)
+			if player_drawnx > xor then 
+				love.graphics.draw(texture_table[inventory[inventory_selection]["id"]],  player_drawnx, player_drawny-((scale/17.7)*8),mining_animation*-1, scale/45, scale/45,20,-15)
+			else
+				love.graphics.draw(texture_table[inventory[inventory_selection]["id"]],  player_drawnx, player_drawny-((scale/17.7)*8),mining_animation, scale/45, scale/45,-5,-15)
+			end
 		end
 	end
 	
@@ -522,7 +535,7 @@ function player.draw()
 	--THIS IS DEBUG INFO FOR THE COLLISION DETECTION
 	
     --love.graphics.rectangle( "line", player_drawnx-(scale/5), player_drawny-(scale/1.1), 0.4*scale,1.71*scale )
-	--love.graphics.circle( "fill", player_drawnx, player_drawny, 3 ) --center
+	love.graphics.circle( "fill", player_drawnx, player_drawny, 3 ) --center
 end
 
 
