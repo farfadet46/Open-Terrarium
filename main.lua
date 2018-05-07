@@ -13,7 +13,6 @@ debugGraph = require 'modules.debugGraph.debugGraph'
 math.randomseed(os.time())
 
 debugger = true
---print ("hello")
 
 dofile("math.lua")
 dofile("terminal.lua")
@@ -36,7 +35,6 @@ dofile("particles.lua")
 scale = 80
 
 screenwidth = love.graphics.getWidth( )
-
 screenheight = love.graphics.getHeight( )
 
 function love.draw()
@@ -54,7 +52,7 @@ function love.draw()
 		entity.render_entity()
 		particle.render_particle()
 		crafting.render_crafting()
-		menu.draw()  
+		menu.draw()
 		render_inventory()
 	end
 	
@@ -76,7 +74,7 @@ function love.load()
 	
 	load_player_textures()
 	
-	fpsGraph = debugGraph:new('fps', 600, 120,100,50,0.01)
+	fpsGraph = debugGraph:new('fps', 600, 120,100,50,0.1)
 	memGraph = debugGraph:new('mem', 600, 160,100,50,0.01)
 	dtGraph = debugGraph:new('custom', 600, 190,100,50,0.01)
 	
@@ -95,13 +93,13 @@ function love.load()
 	stepsound = love.audio.newSource("sounds/step.ogg", "static")
 	oof = love.audio.newSource("sounds/oof.ogg", "static")
 	item_magnet_pickup = love.audio.newSource("sounds/item_magnet.ogg", "static")
-	
-	--invalid file ?
-	
-	menu_music = love.audio.newSource("sounds/menu_music.ogg","static")
+		
+	menu_music = love.audio.newSource("sounds/menu_music.ogg","stream")
+	menu_music:setVolume(0.3)
 	menu_music:setLooping(true)
 	
-	wonder_music = love.audio.newSource("sounds/wonder.ogg","static")
+	wonder_music = love.audio.newSource("sounds/wonder.ogg","stream")
+	wonder_music:setVolume(0.3)
 	wonder_music:setLooping(true)
 	wonder_music:play()
 	
@@ -112,9 +110,7 @@ function love.load()
 		i = i + 1
 	end
 	
-	--playertexture = love.graphics.newImage("textures/player.png")
 	heart = love.graphics.newImage("textures/heart.png")
-	
 	
 end
 
@@ -125,6 +121,7 @@ end
 
 function love.update(dt)
 	if pause ~= true and terminal ~= true then
+		
 		physics.gravity()
 		move(dt)
 		physics.player_x_apply(dt)
@@ -151,6 +148,7 @@ function love.update(dt)
 		maplib.new_block(player.playerx,player.playery)
 	elseif pause == true then
 		pause_game()
+	
 	elseif terminal == true then
 		terminal_logic(dt)
 	end

@@ -97,8 +97,10 @@ function love.keypressed( key, scancode, isrepeat )
 		pause = not pause
 		if pause == false then
 			wonder_music:play()
+			menu_music:stop()
 		else
 			wonder_music:stop()
+			menu_music:play()
 		end
 	end
 	--screenshot
@@ -118,7 +120,6 @@ function love.keypressed( key, scancode, isrepeat )
 	elseif key == "f4" then
 		--local depth = 0
 		maplib.delete_map()
-		
 		
 		
 	--resets the offset

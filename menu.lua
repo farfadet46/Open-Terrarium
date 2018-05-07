@@ -47,17 +47,17 @@ function menu.draw()
 	menu.cursor()
 
 	love.graphics.setFont(font)
-	love.graphics.setColor(0,0,120,255)
+	love.graphics.setColor(0,0,0.5,1)
 	for i = 1,characters do
 		love.graphics.print(menutitle[i], screenwidth-260+(12*i)-2,screenheight-10+menu_char[i]+2 )
 	end
-	love.graphics.setColor(255,0,0,255)
+	love.graphics.setColor(1,0,0,1)
 	for i = 1,characters do
 		love.graphics.print(menutitle[i], screenwidth-260+(12*i),screenheight-10+menu_char[i] )
 	end
-	love.graphics.setColor(255,255,255,255)
+	love.graphics.setColor(1,1,1,1)
 	if debugger == true then
-		love.graphics.setColor(255,255,255,255)
+		love.graphics.setColor(1,1,1,1)
 		fpsGraph:draw()
 		memGraph:draw()
 		dtGraph:draw()
@@ -71,32 +71,32 @@ function menu.draw()
 		local xxer = 600
 		--score debug
 		love.graphics.setFont(font)
-		love.graphics.setColor(255,255,255,255)
+		love.graphics.setColor(1,1,1,1)
 		love.graphics.print("Score:"..tostring(score),xxer,12)
 
 		--debug mining
 		if player.mining == true then
-			love.graphics.setColor(255,0,0,255)
+			love.graphics.setColor(1,0,0,1)
 			love.graphics.print("Mining", xxer,24)
-			love.graphics.setColor(128,128,128,255)
+			love.graphics.setColor(0.8,0.8,0.8,1)
 			love.graphics.print("Placing", xxer+80,24)
 			
 		elseif player.mining == false then		
-			love.graphics.setColor(128,128,128,255)
+			love.graphics.setColor(0.8,0.8,0.8,1)
 			love.graphics.print("Mining", xxer,24)
-			love.graphics.setColor(255,0,0,255)
+			love.graphics.setColor(1,0,0,1)
 			love.graphics.print("Placing", xxer+80,24)
 			
 			--love.graphics.print("PosX:"..player.playerx.." PosY:"..player.playery, 400,150)
 		end
 		--debug player's pos
-		love.graphics.setColor(255,255,255,255)
+		love.graphics.setColor(1,1,1,1)
 		love.graphics.print("PosX:"..(player.playerx+(chunkx*map_max)).." PosY:"..((map_max-player.playery)+(chunky*map_max)), 5,5)
 		--debug mouse's pos
-		love.graphics.setColor(255,255,255,255)
+		love.graphics.setColor(1,1,1,1)
 		love.graphics.print("MX:"..mx.." MY:"..my, xxer,36)
 		--debug selected item
-		love.graphics.setColor(255,255,255,255)
+		love.graphics.setColor(1,1,1,1)
 		love.graphics.print("ITEM:", xxer,48) love.graphics.draw(texture_table[player.selected],xxer+60,45,0,0.8,0.8)
 		
 		love.graphics.print("Chunkx:"..chunkx, xxer,60)

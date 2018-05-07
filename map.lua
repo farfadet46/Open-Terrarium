@@ -386,7 +386,6 @@ function maplib.draw()
 end
 
 function maplib.delete_map()
-	--if love.filesystem.isDirectory("map") then
 	if love.filesystem.getInfo("map",isDirectory) then
 	
 		for _, child in pairs(love.filesystem.getDirectoryItems("map")) do
