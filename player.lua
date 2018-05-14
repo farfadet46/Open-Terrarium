@@ -88,19 +88,24 @@ function love.keypressed( key, scancode, isrepeat )
 
 	--quit
 	if key == "escape" then
-		--maplib.save_chunks()
-		--love.filesystem.write( "/map/player.txt", TSerial.pack({inventory,chunkx,chunky,player.playerx,player.playery}))
-		
-		--love.timer.sleep(3)
-		
-		--love.event.push('quit')
-		pause = not pause
-		if pause == false then
-			wonder_music:play()
-			menu_music:stop()
+	--remove the crafting with esc if open
+		if crafting_open then
+			crafting_open = not crafting_open
 		else
-			wonder_music:stop()
-			menu_music:play()
+			--maplib.save_chunks()
+			--love.filesystem.write( "/map/player.txt", TSerial.pack({inventory,chunkx,chunky,player.playerx,player.playery}))
+			
+			--love.timer.sleep(3)
+			
+			--love.event.push('quit')
+			pause = not pause
+			if pause == false then
+				wonder_music:play()
+				menu_music:stop()
+			else
+				wonder_music:stop()
+				menu_music:play()
+			end
 		end
 	end
 	--screenshot
@@ -142,8 +147,8 @@ function love.keypressed( key, scancode, isrepeat )
 	end
 	
 	--open inventory
-	if key == "e" then
-		crafting_open = not crafting_open
+	if key == "i" then
+		crafting_open = not craftting_open
 	end
 	
 	--open terminal

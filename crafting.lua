@@ -18,6 +18,11 @@ fleche = love.graphics.newImage("textures/fleche.png")
 craft_img_x = 380
 craft_img_y = 134
 
+--[[
+bin= love.graphics.newImage("textures/bin.png")
+craft_bin_x = 480
+craft_bin_y = 225
+]]--
 craft_output_x = 480
 craft_output_y = 134
 
@@ -52,7 +57,10 @@ function crafting.render_crafting()
 		
 		--draw fleche
 		love.graphics.draw(fleche, craft_img_x, craft_img_y, 0, 1, 1)
-	
+		
+		--draw bin
+	--	love.graphics.draw(bin, craft_bin_x, craft_bin_y,0,1,1)
+		
 		--draw output selection
 		if craft_output_selection_x > 0 and craft_output_selection_y > 0 then
 			love.graphics.draw(inventory_slot_selection, craft_output_x, craft_output_y,0, 1, 1)
@@ -182,7 +190,7 @@ function crafting.move_items()
 			--throw item
 			else
 				print("fix this")
-				throw_item()
+			--	throw_item()
 			end
 			
 			

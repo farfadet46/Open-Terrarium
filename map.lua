@@ -289,7 +289,7 @@ function maplib.createmap()
 						-- added on 2018-05-14
 							if math.random() > 0.87 then
 								tiles = schematics.load(tiles,x,y,tree_schem)
-							elseif math.random() < 0.3 then
+							elseif math.random() < 0.15 then
 								tiles[x][y-1]["block"] = 10
 							end
 						end
