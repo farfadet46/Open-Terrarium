@@ -222,7 +222,7 @@ render, and modify everything to work correctly with all loaded chunks
 
 --create stuff
 if loaded_chunks == nil then
-	loaded_chunks = {} --chunks in mememory
+	loaded_chunks = {} --chunks in memory
 end
 
 if not love.filesystem.getInfo("map") then
@@ -284,8 +284,14 @@ function maplib.createmap()
 					--generate trees
 					for x = 1,map_max do
 					for y = 1,map_max do 
-						if tiles[x][y]["block"] == 4 and math.random() > 0.87 then
-							tiles = schematics.load(tiles,x,y,tree_schem)
+						if tiles[x][y]["block"] == 4 then
+						
+						-- added on 2018-05-14
+							if math.random() > 0.87 then
+								tiles = schematics.load(tiles,x,y,tree_schem)
+							elseif math.random() < 0.3 then
+								tiles[x][y-1]["block"] = 10
+							end
 						end
 					end
 					end

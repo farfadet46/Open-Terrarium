@@ -9,6 +9,7 @@ blocks = {
 	{name = "tree", image = "tree.png", drop = 7, drop_amount = 1},   --id 7
 	{name = "wood", image = "wood.png"},   --id 8
 	{name = "woodenplanks", image = "woodenplanks.png"}, --id 9
+	{name = "plant", image="plant.png", collide=false }, --id 10
 }
 
 items = {
@@ -19,12 +20,15 @@ items = {
 		
 }
 
+list_recipe ={}
+
 list_nodes={
 	{	name="tree",
 		description="tronc d'arbre",
 		image="tree.png",
 		drop="tree",
-		groups = 2 -- lent
+		groups = 2, -- lent
+		maxstack = 99
 		},
 	{	name="leave",
 		description="feuilles",

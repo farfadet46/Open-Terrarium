@@ -296,18 +296,17 @@ function crafting.right_click(selectionerx,selectionery,inventory,inventory_widt
 end
 
 
-	
-list_recipe ={
-	{	name="wood",
-		recipe={
-		nil,nil,nil,
-		nil,"tree",nil,
-		nil,nil,nil
+table.insert(list_recipe, 0, 
+	--name = string
+		{ name="wood",
+		--recipe = table 9 item
+		recipe={ nil,nil,nil, nil,"tree",nil, nil,nil,nil
 		},
+		--output = string item name
 		output="wood",
-		amount="4"
-	}	
-}
+		--amount = integer
+		amount = 4,
+	})
 
 
 --[[
@@ -321,20 +320,27 @@ faudrait plutot créer une table de block avec le nom et pas l'id block["wood"] 
 
 
 function create_node(node_name, node_description, node_image, node_drop, node_groups)
-	list_nodes.insert( {name = node_name, description = node_description, image = node_image, drop = node_drop, groups = node_groups} )
+	table.insert (list_nodes, {name = node_name, description = node_description, image = node_image, drop = node_drop, groups = node_groups} )
+	print("recipe of " .. node_name .. " added"  )
 end
 
-function create_craft(node_name,craft_recipe,craft_output,craft_amount)
---	craftinsert = list_recipe.insert ( name=node_name, recipe=craft_recipe, output=craft_output, amount=craft_amount )
+function create_craft(recipe_name,craft_recipe,craft_output,craft_amount)
+	table.insert (list_recipe, {name=recipe_name, recipe=craft_recipe, output=craft_output, amount=craft_amount} )
+	print("recipe of " .. recipe_name .. " added"  )
 end
 
---create_node("fab", "mon premier test", "aucune.png", "fab", 0)
+--create_node( name, description, img, itemdroped, group )
+create_node("fab", "mon premier test", "aucune.png", "fab", 0)
+create_node("fabio", "mon second test", "aucune.png", "fabio", 0)
+
+--create_craft( name, recipe, itemoutput, amount)
+create_craft("planks", {	"nil","nil","nil",  "nil","tree","nil",  "nil","nil","nil",}, "nothing.png", "planks",6)
 
 
 recipe_test = {
 recipe = { nil,nil,nil,nil,7,nil,nil,nil,nil },
-output = 8,
-amount = 4,
+output = 8, --id de sortie
+amount = 4, --nombre d'item a récupérer
 }
 
 

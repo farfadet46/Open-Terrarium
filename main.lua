@@ -1,10 +1,4 @@
 
---for i = 1,100 do
-
-	--print("do function to play sounds at random pitches")
-	
---end
-
 --textures: https://github.com/minetest-texturepacks/Good-Morning-Craft-Minetest
 
 --the directory
