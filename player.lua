@@ -480,7 +480,11 @@ function player.draw()
 	love.graphics.draw(player_arm,  player_drawnx, player_drawny-((scale/17.7)*8),arm_animation, scale/17.7, scale/17.7,2,0)
 	
 	--body
-	love.graphics.draw(player_body,  player_drawnx, player_drawny-((scale/17.7)*8),0, scale/17.7, scale/17.7,2,0)
+	if player_drawnx > xor then 
+		love.graphics.draw(player_body,  player_drawnx, player_drawny-((scale/17.7)*8),0, scale/17.7*-1, scale/17.7,2,0)
+	else
+		love.graphics.draw(player_body,  player_drawnx, player_drawny-((scale/17.7)*8),0, scale/17.7, scale/17.7,2,0)
+	end
 	
 	--mining animation
 	if mine_process == 0 and mining_animation == 0 then
