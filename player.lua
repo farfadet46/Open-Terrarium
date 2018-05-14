@@ -148,7 +148,7 @@ function love.keypressed( key, scancode, isrepeat )
 	
 	--open inventory
 	if key == "i" then
-		crafting_open = not craftting_open
+		crafting_open = not crafting_open
 	end
 	
 	--open terminal
